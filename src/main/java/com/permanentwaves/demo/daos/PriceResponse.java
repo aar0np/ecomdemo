@@ -1,4 +1,4 @@
-package com.permanentwaves.demo;
+package com.permanentwaves.demo.daos;
 
 public class PriceResponse {
     private int count;

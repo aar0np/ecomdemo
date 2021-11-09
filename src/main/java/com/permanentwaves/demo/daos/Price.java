@@ -1,4 +1,4 @@
-package com.permanentwaves.demo;
+package com.permanentwaves.demo.daos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

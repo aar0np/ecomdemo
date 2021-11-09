@@ -1,8 +1,12 @@
-package com.permanentwaves.demo;
+package com.permanentwaves.demo.services;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import com.permanentwaves.demo.daos.Price;
+import com.permanentwaves.demo.daos.PriceResponse;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpEntity;

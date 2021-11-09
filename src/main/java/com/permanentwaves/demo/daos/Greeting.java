@@ -1,5 +1,6 @@
-package com.permanentwaves.demo;
+package com.permanentwaves.demo.daos;
 
+// example from: https://spring.io/guides/gs/rest-service/
 public class Greeting {
 	private final long id;
 	private final String content;
