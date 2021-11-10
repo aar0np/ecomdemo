@@ -1,20 +1,18 @@
 package com.permanentwaves.demo.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.permanentwaves.demo.daos.Price;
-import com.permanentwaves.demo.daos.PriceResponse;
-
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpEntity;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import com.permanentwaves.demo.daos.Product;
+import com.permanentwaves.demo.daos.ProductResponse;
 
 @Service
-public class PriceSvc {
+public class ProductSvc {
 
 	private final RestTemplate restTemplate;
 	private final HttpHeaders headers;
@@ -22,7 +20,7 @@ public class PriceSvc {
 	private String baseAstraUrl;
 	
 	@Autowired
-	public PriceSvc(RestTemplateBuilder builder) {
+	public ProductSvc(RestTemplateBuilder builder) {
         // build header
 		headers = new HttpHeaders();
 	    headers.set("x-cassandra-token", System.getenv("ASTRA_DB_APPLICATION_TOKEN"));
@@ -43,28 +41,28 @@ public class PriceSvc {
 				.build();
 	}
 	
-	public Price getPrice(String productId, String storeId) {
+	public Product getProduct(String productId) {
 
-		String astraUrl = "/price/" + productId + "/" + storeId;
+		String astraUrl = "/product/" + productId;
 	    
-		PriceResponse resp = restTemplate.exchange(
+		ProductResponse resp = restTemplate.exchange(
 			astraUrl,
     	    HttpMethod.GET,
     	    httpEntity,
-    	    PriceResponse.class
+    	    ProductResponse.class
         ).getBody();
 
 		// only needed for debugging
 		//System.out.println("url = " + baseAstraUrl + astraUrl);
 		
-		Price price = new Price();
+		Product product = new Product();
 		int count = resp.getCount();
 		if (count > 0) {
-			Price[] prices = resp.getData();
+			Product[] products = resp.getData();
 			// should only be one item
-			price = prices[0];
+			product = products[0];
 		} 
 
-		return price;
+		return product;
 	}
 }
