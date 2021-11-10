@@ -18,6 +18,7 @@ Endpoint:
  - /product/{productid}
 
 Table CQL:
+
     CREATE TABLE product (
         product_id TEXT,
         product_group TEXT,
@@ -39,6 +40,7 @@ Endpoints:
 Note: Without specifying a `storeid`, the default `storeid` of "web" is used.  See `EcomController.java`.
 
 Table CQL:
+
     CREATE TABLE price (
         product_id TEXT,
         store_id TEXT,
