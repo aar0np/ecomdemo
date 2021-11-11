@@ -10,6 +10,11 @@ Needs the following environment variables defined:
 
 These can be defined in the same terminal session as the application is run from.  You can also specify these env vars as a part of a run configuration in your IDE.
 
+## To run:
+
+    mvn clean install
+    java -jar target/ecomdemo-0.1.jar
+
 ## Services
 Endpoints and expected table CQL listed for each service below.  Create each table in the same keyspace that you have set the `ASTRA_DB_KEYSPACE` env var to.
 
