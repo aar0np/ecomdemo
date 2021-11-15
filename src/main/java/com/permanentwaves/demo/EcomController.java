@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.permanentwaves.demo.daos.Category;
 import com.permanentwaves.demo.daos.Greeting;
 import com.permanentwaves.demo.daos.Price;
 import com.permanentwaves.demo.daos.Product;
+import com.permanentwaves.demo.services.CategorySvc;
 import com.permanentwaves.demo.services.PriceSvc;
 import com.permanentwaves.demo.services.ProductSvc;
 
@@ -19,6 +21,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 public class EcomController {
 	private final PriceSvc priceSvc;
 	private final ProductSvc productSvc;
+	private final CategorySvc categorySvc;
 	
 	private static final String template = "Hello, %s!";
 	private final AtomicLong counter = new AtomicLong();
@@ -26,6 +29,7 @@ public class EcomController {
 	public EcomController() {
 		this.priceSvc = new PriceSvc(new RestTemplateBuilder());
 		this.productSvc = new ProductSvc(new RestTemplateBuilder());
+		this.categorySvc = new CategorySvc(new RestTemplateBuilder());
 	}
 	
 	// example from: https://spring.io/guides/gs/rest-service/
@@ -49,5 +53,15 @@ public class EcomController {
 	@GetMapping("/product/{productid}")
 	public Product product(@PathVariable(value = "productid") String productId) {
 		return productSvc.getProduct(productId);
+	}
+	
+	@GetMapping("/category/{parent}")
+	public Category[] categories(@PathVariable(value = "parent") String parent) {
+		return categorySvc.getCategories(parent);
+	}
+
+	@GetMapping("/category/{parent}/{category}")
+	public Category categories(@PathVariable(value = "parent") String parent, @PathVariable(value = "category") String category) {
+		return categorySvc.getCategory(parent,category);
 	}
 }
