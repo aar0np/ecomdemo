@@ -62,11 +62,11 @@ Notes:
  - Without specifying a `category`, all categories for the `parent` are returned in an array.
  - Once a category from the bottom of the hierarchy is returned, a `products` ArrayList will be returned.  From there, the returned productIds can be used with the `/product` service.
  - Category navigation is achieved by using the `name` properties returned for each category.
-    /category/toplevel  =>  Category[]: Clothing, Cups and Mugs, Tech Accessories, Wall Decor
-    /category/toplevel/Clothing  =>  Category: Clothing
-    /category/Clothing  =>  Category[]: T-Shirts, Hoodies, Jackets
-    /category/T-Shirts  =>  Category[]: Men’s "Your Face...Autowired" T-Shirt, Men’s "Go Away...Annotation" T-Shirt
-    /category/T-Shirts/Men’s%20"Your%20Face...Autowired"%20T-Shirt  ==>  products List<String>: 'LS534S','LS534M','LS534L','LS534XL','LS5342XL','LS5343XL'
+ - /category/toplevel  =>  Category[]: Clothing, Cups and Mugs, Tech Accessories, Wall Decor
+ - /category/toplevel/Clothing  =>  Category: Clothing
+ - /category/Clothing  =>  Category[]: T-Shirts, Hoodies, Jackets
+ - /category/T-Shirts  =>  Category[]: Men’s "Your Face...Autowired" T-Shirt, Men’s "Go Away...Annotation" T-Shirt
+ - /category/T-Shirts/Men’s%20"Your%20Face...Autowired"%20T-Shirt  ==>  products List<String>: 'LS534S','LS534M','LS534L','LS534XL','LS5342XL','LS5343XL'
 
 Table CQL:
 
