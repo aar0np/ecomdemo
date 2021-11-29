@@ -70,8 +70,11 @@ Notes:
 
 Table CQL:
 
-    CREATE TABLE price (
-        product_id TEXT,
-        store_id TEXT,
-        value DECIMAL,
-    PRIMARY KEY(product_id,store_id));
+    CREATE TABLE category (
+        name TEXT,
+        id UUID,
+        image TEXT,
+        parent TEXT,
+        children LIST<TEXT>,
+        products LIST<TEXT>,
+        PRIMARY KEY (parent,name,id));
