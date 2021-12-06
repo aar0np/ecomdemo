@@ -7,8 +7,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
 
-import com.permanentwaves.demo.daos.Category;
-import com.permanentwaves.demo.daos.CategoryResponse;
+import com.datastax.tutorials.service.category.Category;
+import com.datastax.tutorials.service.category.CategoryResponse;
 
 public class CategorySvc {
 

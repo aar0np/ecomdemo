@@ -1,4 +1,4 @@
-package com.permanentwaves.demo.daos;
+package com.datastax.tutorials.service.category;
 
 import java.util.List;
 import java.util.UUID;

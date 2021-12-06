@@ -1,4 +1,4 @@
-package com.permanentwaves.demo.daos;
+package com.datastax.tutorials.service.category;
 
 public class CategoryResponse {
     private int count;
