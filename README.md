@@ -5,9 +5,10 @@
 [![License Apache2](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Discord](https://img.shields.io/discord/685554030159593522)](https://discord.com/widget?id=685554030159593522&theme=dark)
 
-## 📋 Table of content
-
 <img src="img/splash.png?raw=true" align="right" width="400px"/>
+
+## 📋 Table of contents
+
 
 1. [Create your Database](#1-create-astra-db-instance)
 2. [Create your schema](#5-create-a-table)
