@@ -10,13 +10,13 @@
 ## 📋 Table of contents
 
 1. [Create your Database](#1-create-astra-db-instance)
-2. [Create your schema](#5-create-a-table)
-3. [Populate the dataset](#3-create-a-table)
-4. [Create a token](#5-create-a-table)
-5. [Setup your application](#5-create-a-table)
-6. [Run Unit Tests](#5-run-unit-tests)
-7. [Start the Backend API](#6-start-the-backend-api)
-8. [Start the frontend](#6-start-the-backend-api)
+2. [Create your schema](#2-create-your-schema)
+3. [Populate the dataset](#3-populate-the-data)
+4. [Create a token](#4-create-your-token)
+5. [Setup your application](#5-setup-your-application)
+6. [Run Unit Tests](#6-run-unit-tests)
+7. [Start the Backend API](#7-start-the-backend-api)
+8. [Start the frontend](#8-start-the-frontend)
 
 ## 1. Create Astra DB Instance
 
@@ -54,7 +54,7 @@ The status will change to `Active` when the database is ready, this will only ta
 
 ![image](data/img/astra-create-db.gif?raw=true)
 
-[🏠 Back to Table of Contents](#-table-of-content)
+[🏠 Back to Table of Contents](#-table-of-contents)
 
 ## 2. Create your schema
 
@@ -111,6 +111,8 @@ CREATE TABLE product (
     images SET<TEXT>,
 PRIMARY KEY(product_id));
 ```
+
+[🏠 Back to Table of Contents](#-table-of-contents)
 
 ## 3. Populate the Data
 
@@ -178,6 +180,8 @@ INSERT INTO product(product_id,product_group,name,brand,model_number,short_desc,
 VALUES ('LN355XL','LN355','Your Face is an @Autowired @Bean T-Shirt','NerdShirts','NS102','Men’s 3x Large "Your Face...Autowired" T-Shirt','Everyone knows that one person who overuses the "your face" jokes.',{'size':'3x Large','material':'cotton, polyester','cut':'men’s','color':'black'},{'ln355.png'});
 ```
 
+[🏠 Back to Table of Contents](#-table-of-contents)
+
 ## 4. Create your token
 
 #### ✅ 4a. Create the token
@@ -214,13 +218,15 @@ To know more about roles of each token you can have a look to [this video.](http
 
 **Note: Make sure you don't close the window accidentally or otherwise - if you close this window before you copy the values, the application token is lost forever. They won't be available later for security reasons.**
 
-We are now set with the database and credentials. Let's start coding with Spring !
+We are now set with the database and credentials.
 
-[🏠 Back to Table of Contents](#-table-of-content)
+[🏠 Back to Table of Contents](#-table-of-contents)
 
 ## 5. Setup your application
 
 To run the application you need to provide the credentials and identifier to the application. you will have to provide 6 values in total as shown below
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ecomdemo/workshop-ecommerce)
 
 ✅ **5a: Enter the token**
 
@@ -246,7 +252,7 @@ astra:
 
 - Select you database `workshops` in the left panel and then copy values for `cloud-region` and `database-id` (clusterID) from the details page.
 
-[🏠 Back to Table of Contents](#table-of-content)
+[🏠 Back to Table of Contents](#-table-of-contents)
 
 ## 6. Run Unit Tests
 
@@ -332,7 +338,7 @@ Tech Accessories
 Wall Decor
 ```
 
-[🏠 Back to Table of Contents](#table-of-content)
+[🏠 Back to Table of Contents](#-table-of-contents)
 
 ## 7. Start the backend API
 
@@ -340,7 +346,7 @@ Wall Decor
 mvn spring-boot:run
 ```
 
-![image](data/img/swagger.png?raw=true)
+[🏠 Back to Table of Contents](#-table-of-contents)
 
 ## 8. Start the frontend
 
@@ -350,5 +356,5 @@ npm install
 npm run start
 ```
 
-![image](data/img/splash.png?raw=true)
+[🏠 Back to Table of Contents](#-table-of-contents)
 
