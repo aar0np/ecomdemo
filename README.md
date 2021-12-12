@@ -346,6 +346,9 @@ Wall Decor
 mvn spring-boot:run
 ```
 
+![image](data/img/swagger.png?raw=true)
+
+
 [🏠 Back to Table of Contents](#-table-of-contents)
 
 ## 8. Start the frontend
@@ -355,6 +358,8 @@ cd ui
 npm install
 npm run start
 ```
+
+![image](data/img/splash.png?raw=true)
 
 [🏠 Back to Table of Contents](#-table-of-contents)
 
