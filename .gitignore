@@ -24,3 +24,5 @@ dist
 .DS_Store
 
 .factorypath
+.templates
+template.config.js
