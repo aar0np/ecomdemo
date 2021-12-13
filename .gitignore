@@ -26,3 +26,5 @@ dist
 .factorypath
 .templates
 template.config.js
+.env
+src/main/resources/static/*

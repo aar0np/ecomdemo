@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import useSWR from "swr";
 import { fetcher } from "../../api";
 import { useParams } from "react-router-dom";
@@ -147,7 +146,7 @@ const ProductDetail = () => {
               <div className="flex items-center justify-between">
                 <h2 className="text-sm font-medium text-gray-900">Size</h2>
                 <a
-                  href="#"
+                  href="/"
                   className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
                 >
                   See sizing chart

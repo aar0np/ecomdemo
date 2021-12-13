@@ -22,7 +22,7 @@ const Footer = () => {
                   <h3 className="text-sm font-medium text-gray-900">
                     Products
                   </h3>
-                  <ul role="list" className="mt-6 space-y-6">
+                  <ul className="mt-6 space-y-6">
                     {footerNavigation.products.map((item) => (
                       <li key={item.name} className="text-sm">
                         <a
@@ -37,7 +37,7 @@ const Footer = () => {
                 </div>
                 <div>
                   <h3 className="text-sm font-medium text-gray-900">Company</h3>
-                  <ul role="list" className="mt-6 space-y-6">
+                  <ul className="mt-6 space-y-6">
                     {footerNavigation.company.map((item) => (
                       <li key={item.name} className="text-sm">
                         <a
@@ -55,7 +55,7 @@ const Footer = () => {
                 <h3 className="text-sm font-medium text-gray-900">
                   Customer Service
                 </h3>
-                <ul role="list" className="mt-6 space-y-6">
+                <ul className="mt-6 space-y-6">
                   {footerNavigation.customerService.map((item) => (
                     <li key={item.name} className="text-sm">
                       <a
