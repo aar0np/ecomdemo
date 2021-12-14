@@ -1,13 +1,11 @@
 # category table
 CREATE TABLE category (
+    parent_id UUID,
+    category_id UUID,
     name TEXT,
-    id UUID,
     image TEXT,
-    parent TEXT,
-    children LIST<TEXT>,
     products LIST<TEXT>,
-    PRIMARY KEY (parent,name,id)
-);
+PRIMARY KEY (parent_id,category_id));
 
 # price table
 CREATE TABLE price (
