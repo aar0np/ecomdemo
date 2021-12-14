@@ -11,24 +11,17 @@ import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 public class CategoryPrimaryKey {
 
     @PrimaryKeyColumn(
-            name = "parent", 
+            name = "parent_id", 
             ordinal = 0, 
             type = PrimaryKeyType.PARTITIONED)
-    private String parent;
+    private UUID parentId;
 
     @PrimaryKeyColumn(
-            name = "name", 
-            ordinal = 1, 
-            type = PrimaryKeyType.CLUSTERED, 
-            ordering = Ordering.ASCENDING)
-    private String name;
-    
-    @PrimaryKeyColumn(
-            name = "id", 
+            name = "category_id", 
             ordinal = 2, 
             type = PrimaryKeyType.CLUSTERED, 
             ordering = Ordering.ASCENDING)
-    private UUID id;
+    private UUID categoryId;
 
     /**
      * Getter accessor for attribute 'parent'.
@@ -36,8 +29,8 @@ public class CategoryPrimaryKey {
      * @return
      *       current value of 'parent'
      */
-    public String getParent() {
-        return parent;
+    public UUID getParentId() {
+        return parentId;
     }
 
     /**
@@ -45,28 +38,10 @@ public class CategoryPrimaryKey {
      * @param parent
      * 		new value for 'parent '
      */
-    public void setParent(String parent) {
-        this.parent = parent;
+    public void setParentId(UUID parentId) {
+        this.parentId = parentId;
     }
 
-    /**
-     * Getter accessor for attribute 'name'.
-     *
-     * @return
-     *       current value of 'name'
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Setter accessor for attribute 'name'.
-     * @param name
-     * 		new value for 'name '
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
 
     /**
      * Getter accessor for attribute 'id'.
@@ -74,8 +49,8 @@ public class CategoryPrimaryKey {
      * @return
      *       current value of 'id'
      */
-    public UUID getId() {
-        return id;
+    public UUID getCategoryId() {
+        return categoryId;
     }
 
     /**
@@ -83,8 +58,8 @@ public class CategoryPrimaryKey {
      * @param id
      * 		new value for 'id '
      */
-    public void setId(UUID id) {
-        this.id = id;
+    public void setCategoryId(UUID categoryId) {
+        this.categoryId = categoryId;
     }
     
 }

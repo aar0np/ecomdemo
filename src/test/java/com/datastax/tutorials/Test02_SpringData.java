@@ -1,6 +1,7 @@
 package com.datastax.tutorials;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -18,13 +19,11 @@ public class Test02_SpringData {
     
     @Test
     public void show_toplevelItems() {
-        List<CategoryEntity> categories = catRepo.findByKeyParent("toplevel");
+        List<CategoryEntity> categories = catRepo.findByKeyParentId(UUID.fromString("ffdac25a-0244-4894-bb31-a0884bc82aa9"));
         Assertions.assertEquals(4, categories.size());
         System.out.println("Categories:");
         categories.stream().forEach(c -> {
-            System.out.println("- " + c.getKey().getName() + " with hildren:" + c.getChildren());
+            System.out.println("- " + c.getName() + " with ids:" + c.getKey().getCategoryId());
         });
     }
-    
-
 }

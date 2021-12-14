@@ -18,13 +18,13 @@ public class CategoryEntity implements Serializable {
     @PrimaryKey
     private CategoryPrimaryKey key;
     
+    @Column("name")
+    @CassandraType(type = Name.TEXT)
+    private String name;
+    
     @Column("image")
     @CassandraType(type = Name.TEXT)
     private String image;
-    
-    @Column("children")
-    @CassandraType(type = CassandraType.Name.LIST, typeArguments = Name.TEXT)
-    private List<String> children;
     
     @Column("products")
     @CassandraType(type = CassandraType.Name.LIST, typeArguments = Name.TEXT)
@@ -69,22 +69,22 @@ public class CategoryEntity implements Serializable {
     }
 
     /**
-     * Getter accessor for attribute 'children'.
+     * Getter accessor for attribute 'name'.
      *
      * @return
-     *       current value of 'children'
+     *       current value of 'name'
      */
-    public List<String> getChildren() {
-        return children;
+    public String getName() {
+        return name;
     }
 
     /**
-     * Setter accessor for attribute 'children'.
-     * @param children
-     * 		new value for 'children '
+     * Setter accessor for attribute 'name'.
+     * @param name
+     * 		new value for 'name '
      */
-    public void setChildren(List<String> children) {
-        this.children = children;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**

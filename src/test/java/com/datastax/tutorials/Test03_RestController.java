@@ -25,7 +25,7 @@ public class Test03_RestController {
     @DisplayName("Test endpoint invocation")
     public void test() {
         // Given
-        URI targetUrl= UriComponentsBuilder.fromUriString("/api/v1/categories/toplevel")                             
+        URI targetUrl= UriComponentsBuilder.fromUriString("/api/v1/categories/ffdac25a-0244-4894-bb31-a0884bc82aa9")                             
                 .build()                                                
                 .encode()                                               
                 .toUri();

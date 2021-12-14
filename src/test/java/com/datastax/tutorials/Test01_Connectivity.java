@@ -32,7 +32,7 @@ public class Test01_Connectivity {
         System.out.println("Execute some Cql (CqlSession)");
         System.out.println("+ Your Keyspace: " + cqlSession.getKeyspace().get());
         System.out.println("+ Product Categories: ");
-        cqlSession.execute("select name from category ")
+        cqlSession.execute("SELECT name FROM category WHERE parent_id = ffdac25a-0244-4894-bb31-a0884bc82aa9")
                 .all().stream()
                 .map(r -> r.getString("name"))
                 .forEach(System.out::println);

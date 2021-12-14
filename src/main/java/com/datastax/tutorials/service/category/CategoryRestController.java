@@ -8,6 +8,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,18 +66,18 @@ public class CategoryRestController {
      * @param req
      *      current request
      * @param parent id
-     *      product identifier
+     *      category identifier
      * @return
      *      list of categories
      */
-    @GetMapping("/{parent}")
+    @GetMapping("/{parentid}")
     @Operation(
-     summary = "Retrieve Categories for a product from its id",
-     description= "Find **category list** from a parent from its id `SELECT * FROM category WHERE parent =?`",
+     summary = "Retrieve Categories for a product from its parentId",
+     description= "Find **category list** from a parent from its id `SELECT * FROM category WHERE parent_id =?`",
      responses = {
        @ApiResponse(
          responseCode = "200",
-         description = "A list of category is provided for the parent",
+         description = "A list of category is provided for the parent id",
          content = @Content(
            mediaType = "application/json",
            schema = @Schema(implementation = Category.class, name = "Category")
@@ -88,28 +89,28 @@ public class CategoryRestController {
          content = @Content(mediaType = "")),
        @ApiResponse(
          responseCode = "400",
-         description = "Invalid parameter check productId format."),
+         description = "Invalid parameter check parentId format."),
        @ApiResponse(
          responseCode = "500",
          description = "Technical Internal error.") 
     })
-    public ResponseEntity<Stream<Category>> findCategoriesFromParent(
+    public ResponseEntity<Stream<Category>> findCategoriesFromParentId(
             HttpServletRequest req, 
-            @PathVariable(value = "parent")
-            @Parameter(name = "parent", description = "Parent identifier", example = "T-Shirts")
-            String parent) {
+            @PathVariable(value = "parentid")
+            @Parameter(name = "parentid", description = "Parent identifier", example = "ffdac25a-0244-4894-bb31-a0884bc82aa9")
+            UUID parentid) {
         // Get the partition (be careful unicity is here not ensured
-        List<CategoryEntity> e = catRepo.findByKeyParent(parent);
+        List<CategoryEntity> e = catRepo.findByKeyParentId(parentid);
         if (e.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(e.stream().map(this::mapCategory));
     }
             
-    @GetMapping("/category/{parent}/{name}")
+    @GetMapping("/category/{parentid}/{categoryid}")
     @Operation(
-       summary = "Retrieve category for a parent and a name",
-       description= "Find Category from a product and a store `SELECT * FROM category WHERE parent =? and name=?`",
+       summary = "Retrieve category for a parentId and a categoryId",
+       description= "Find Category from a product and a store `SELECT * FROM category WHERE parent_id =? and category_id=?`",
        responses = {
          @ApiResponse(
            responseCode = "200",
@@ -125,14 +126,14 @@ public class CategoryRestController {
            responseCode = "500",
            description = "Technical Internal error.") 
     })
-    public ResponseEntity<Category> findByProductIdAndStoreId(HttpServletRequest req, 
-            @PathVariable(value = "productid")
-            @Parameter(name = "parent", description = "Parent identifier", example = "Clothing")
-            String parent,
-            @PathVariable(value = "name")
-            @Parameter(name = "name", description = "Category name", example = "T-Shirts")
-            String name) {
-        List<CategoryEntity> categories = catRepo.findByKeyParentAndKeyName(parent, name);
+    public ResponseEntity<Category> findByParentIdAndCategoryId(HttpServletRequest req, 
+            @PathVariable(value = "parentid")
+            @Parameter(name = "parentid", description = "Parent identifier", example = "ffdac25a-0244-4894-bb31-a0884bc82aa9")
+            UUID parentId,
+            @PathVariable(value = "categoryid")
+    		@Parameter(name = "categoryid", description = "Category identifier", example = "18105592-77aa-4469-8556-833b419dacf4")
+    		UUID categoryId) {
+        List<CategoryEntity> categories = catRepo.findByKeyParentIdAndKeyCategoryId(parentId, categoryId);
         if (categories.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -152,11 +153,10 @@ public class CategoryRestController {
      */
     private Category mapCategory(CategoryEntity c) {
         Category ca = new Category();
-        ca.setParent(c.getKey().getParent());
-        ca.setName(c.getKey().getName());
-        ca.setId(c.getKey().getId());
+        ca.setParentId(c.getKey().getParentId());
+        ca.setCategoryId(c.getKey().getCategoryId());
+        ca.setName(c.getName());
         ca.setImage(c.getImage());
-        ca.setChildren(c.getChildren());
         ca.setProducts(c.getProducts());
         return ca;
     }

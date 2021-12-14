@@ -22,7 +22,7 @@
 
 **`ASTRA DB`** is the simplest way to run Cassandra with zero operations at all - just push the button and get your cluster. No credit card required, $25.00 USD credit every month, roughly 20M read/write operations, 80GB storage monthly - sufficient to run small production workloads.
 
-#### ✅ 1a. Register 
+#### ✅ 1a. Register
 
 If you do have an account yet register and sign In to Astra DB this is FREE and NO CREDIT CARD asked. [https://astra.datastax.com](https://astra.datastax.com): You can use your `Github`, `Google` accounts or register with an `email`.
 
@@ -58,11 +58,11 @@ The status will change to `Active` when the database is ready, this will only ta
 
 ## 2. Create your schema
 
-Informations:
- - The "top" categories of the product hierarchy can be retrieved using a `parent` of "toplevel".
- - Without specifying a `category`, all categories for the `parent` are returned in an array.
- - Once a category from the bottom of the hierarchy is returned, a `products` ArrayList will be returned.  From there, the returned productIds can be used with the `/product` service.
- - Category navigation is achieved by using the `name` properties returned for each category.
+Information:
+ - The "top" categories of the product hierarchy can be retrieved using a `parent_id` of "ffdac25a-0244-4894-bb31-a0884bc82aa9".
+ - Without specifying a `category_id`, all categories for the `parent_id` are returned in an array.
+ - Once a category from the bottom of the hierarchy is returned, a `products` ArrayList will be returned.  From there, the returned `product_id` can be used with the `/product` service.
+ - Category navigation is achieved by using the `name` and `category_id` properties returned for each category.
  - /category/toplevel  =>  Category[]: Clothing, Cups and Mugs, Tech Accessories, Wall Decor
  - /category/toplevel/Clothing  =>  Category: Clothing
  - /category/Clothing  =>  Category[]: T-Shirts, Hoodies, Jackets
@@ -76,19 +76,17 @@ Informations:
 use ecommerce;
 ```
 
-#### ✅ 2b. Execute the following script to create the schema
+#### ✅ 2b. Execute the following CQL script to create the schema
 
 ```sql
 # category table
 CREATE TABLE category (
+    parent_id UUID,
+    category_id UUID,
     name TEXT,
-    id UUID,
     image TEXT,
-    parent TEXT,
-    children LIST<TEXT>,
     products LIST<TEXT>,
-    PRIMARY KEY (parent,name,id)
-);
+PRIMARY KEY (parent_id,category_id));
 
 # price table
 CREATE TABLE price (
@@ -120,24 +118,25 @@ PRIMARY KEY(product_id));
 
 ```sql
 # Categories
-INSERT INTO category (name,id,image,parent,children) VALUES ('Clothing',UUID(),'ls534.png','toplevel',['T-Shirts','Hoodies','Jackets']);
-INSERT INTO category (name,id,image,parent,children) VALUES ('Tech Accessories',UUID(),'','toplevel',['Mousepads','Wrist Rests','Laptop Covers']);
-INSERT INTO category (name,id,image,parent,children) VALUES ('Cups and Mugs',UUID(),'','toplevel',['Cups','Coffee Mugs','Travel Mugs']);
-INSERT INTO category (name,id,image,parent,children) VALUES ('Wall Decor',UUID(),'bh001.png','toplevel',['Posters','Wall Art']);
-INSERT INTO category (name,id,image,parent,children) VALUES ('T-Shirts',UUID(),'ls534.png','Clothing',['Men’s "Your Face...Autowired" T-Shirt','Men’s "Go Away...Annotation" T-Shirt']);
-INSERT INTO category (name,id,image,parent,children) VALUES ('Hoodies',UUID(),'','Clothing',[]);
-INSERT INTO category (name,id,image,parent,children) VALUES ('Jackets',UUID(),'','Clothing',[]);
-INSERT INTO category (name,id,image,parent,children) VALUES ('Mousepads',UUID(),'','Tech Accessories',[]);
-INSERT INTO category (name,id,image,parent,children) VALUES ('Wrist Rests',UUID(),'','Tech Accessories',[]);
-INSERT INTO category (name,id,image,parent,children) VALUES ('Laptop Covers',UUID(),'','Tech Accessories',[]);
-INSERT INTO category (name,id,image,parent,children) VALUES ('Cups',UUID(),'','Cups and Mugs',[]);
-INSERT INTO category (name,id,image,parent,children) VALUES ('Coffee Mugs',UUID(),'','Cups and Mugs',[]);
-INSERT INTO category (name,id,image,parent,children) VALUES ('Travel Mugs',UUID(),'','Cups and Mugs',[]);
-INSERT INTO category (name,id,image,parent,children) VALUES ('Posters',UUID(),'','Wall Decor',[]);
-INSERT INTO category (name,id,image,parent,children) VALUES ('Wall Art',UUID(),'bh001.png','Wall Decor',['Bigheads']);
-INSERT INTO category (name,id,image,parent,products) VALUES ('Men’s "Go Away...Annotation" T-Shirt',UUID(),'ls534.png','T-Shirts',['LS534S','LS534M','LS534L','LS534XL','LS5342XL','LS5343XL']);
-INSERT INTO category (name,id,image,parent,products) VALUES ('Men’s "Your Face...Autowired" T-Shirt',UUID(),'ls355.png','T-Shirts',['LS355S','LS355M','LS355L','LS355XL','LS3552XL','LS3553XL']);
-INSERT INTO category (name,id,image,parent,products) VALUES ('Bigheads',UUID(),'bh001.png','Wall Art',['bh001','bh002','bh003']);
+INSERT INTO category (name,category_id,image,parent_id) VALUES ('Clothing',18105592-77aa-4469-8556-833b419dacf4,'ls534.png',ffdac25a-0244-4894-bb31-a0884bc82aa9);
+INSERT INTO category (name,category_id,image,parent_id) VALUES ('Tech Accessories',5929e846-53e8-473e-8525-80b666c46a83,'',ffdac25a-0244-4894-bb31-a0884bc82aa9);
+INSERT INTO category (name,category_id,image,parent_id) VALUES ('Cups and Mugs',675cf3a2-2752-4de7-ae2e-849471c29f51,'',ffdac25a-0244-4894-bb31-a0884bc82aa9);
+INSERT INTO category (name,category_id,image,parent_id) VALUES ('Wall Decor',591bf485-de09-4b46-8fd2-5d9dc7ca101e,'bh001.png',ffdac25a-0244-4894-bb31-a0884bc82aa9);
+INSERT INTO category (name,category_id,image,parent_id) VALUES ('T-Shirts',91455473-212e-4c6e-8bec-1da06779ae10,'ls534.png',18105592-77aa-4469-8556-833b419dacf4);
+INSERT INTO category (name,category_id,image,parent_id) VALUES ('Hoodies',6a4d86aa-ceb5-4c6f-b9b9-80e9a8c58ad1,'',18105592-77aa-4469-8556-833b419dacf4);
+INSERT INTO category (name,category_id,image,parent_id) VALUES ('Jackets',d887b049-d16c-46e1-8c94-0a1280dedc30,'',18105592-77aa-4469-8556-833b419dacf4);
+INSERT INTO category (name,category_id,image,parent_id) VALUES ('Mousepads',d04dfb5b-69c6-4e97-b572-e9e390165a84,'',5929e846-53e8-473e-8525-80b666c46a83);
+INSERT INTO category (name,category_id,image,parent_id) VALUES ('Wrist Rests',aa161129-d456-45ba-b1f0-fac7898b6d06,'',5929e846-53e8-473e-8525-80b666c46a83);
+INSERT INTO category (name,category_id,image,parent_id) VALUES ('Laptop Covers',1c4b8599-78df-4f93-9c52-578bd959a3a5,'',5929e846-53e8-473e-8525-80b666c46a83);
+INSERT INTO category (name,category_id,image,parent_id) VALUES ('Cups',7536fdef-fcd9-44a3-9360-0bffd2904408,'',675cf3a2-2752-4de7-ae2e-849471c29f51);
+INSERT INTO category (name,category_id,image,parent_id) VALUES ('Coffee Mugs',20374300-185c-4ee5-b0bc-77fbdc3a21ed,'',675cf3a2-2752-4de7-ae2e-849471c29f51);
+INSERT INTO category (name,category_id,image,parent_id) VALUES ('Travel Mugs',0660483e-2fad-447b-b19a-63ab4935e482,'',675cf3a2-2752-4de7-ae2e-849471c29f51);
+INSERT INTO category (name,category_id,image,parent_id) VALUES ('Posters',fdbe9dcb-6878-4216-a64d-27c094b1b075,'',591bf485-de09-4b46-8fd2-5d9dc7ca101e);
+INSERT INTO category (name,category_id,image,parent_id) VALUES ('Wall Art',943482f9-070c-4390-bb30-2107b6fe653a,'bh001.png',591bf485-de09-4b46-8fd2-5d9dc7ca101e);
+INSERT INTO category (name,category_id,image,parent_id,products) VALUES ('Men’s "Go Away...Annotation" T-Shirt',99c4d825-d262-4a95-a04e-cc72e7e273c1,'ls534.png',91455473-212e-4c6e-8bec-1da06779ae10,['LS534S','LS534M','LS534L','LS534XL','LS5342XL','LS5343XL']);
+INSERT INTO category (name,category_id,image,parent_id,products) VALUES ('Men’s "Your Face...Autowired" T-Shirt',3fa13eee-d057-48d0-b0ae-2d83af9e3e3e,'ls355.png',91455473-212e-4c6e-8bec-1da06779ae10,['LS355S','LS355M','LS355L','LS355XL','LS3552XL','LS3553XL']);
+INSERT INTO category (name,category_id,image,parent_id,products) VALUES ('Bigheads',2f25a732-0744-406d-baee-3e8131cbe500,'bh001.png',943482f9-070c-4390-bb30-2107b6fe653a,['bh001','bh002','bh003']);
+
 
 # Prices
 INSERT INTO price(product_id,store_id,value) VALUES ('LS534S','web',14.99);
@@ -274,28 +273,14 @@ mvn test -Dtest=com.datastax.tutorials.Test01_Connectivity
 [..init...]
 Execute some Cql (CqlSession)
 + Your Keyspace: sag_ecommerce
-+ Product Categories: 
-Posters
-Wall Art
-Men’s "Go Away...Annotation" T-Shirt
-Men’s "Your Face...Autowired" T-Shirt
++ Product Categories:
 Clothing
 Cups and Mugs
 Tech Accessories
 Wall Decor
-Coffee Mugs
-Cups
-Travel Mugs
-Laptop Covers
-Mousepads
-Wrist Rests
-Bigheads
-Hoodies
-Jackets
-T-Shirts
 List Databases available in your Organization (AstraClient)
 + Your OrganizationID: e195fbea-79b6-4d60-9291-063d8c9e6364
-+ Your Databases: 
++ Your Databases:
 workshops	 : id=8c98b922-aeb0-4435-a0d5-a2788e23dff8, region=eu-central-1
 sample_apps	 : id=c2d6bd3d-6112-47f6-9b66-b033e6174f0e, region=us-east-1
 sdk_tests	 : id=a52f5879-3476-42d2-b5c9-81b18fc6d103, region=us-east-1
@@ -362,4 +347,3 @@ npm run start
 ![image](data/img/splash.png?raw=true)
 
 [🏠 Back to Table of Contents](#-table-of-contents)
-

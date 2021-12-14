@@ -1,6 +1,7 @@
 package com.datastax.tutorials.service.category;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.cassandra.repository.CassandraRepository;
 
@@ -15,7 +16,7 @@ public interface CategoryRepository extends CassandraRepository<CategoryEntity, 
      * @return
      *      list of prices
      */
-    List<CategoryEntity> findByKeyParent(String parent);
+    List<CategoryEntity> findByKeyParentId(UUID parentId);
     
     /**
      * Find the category if exist.
@@ -27,6 +28,6 @@ public interface CategoryRepository extends CassandraRepository<CategoryEntity, 
      * @return
      *      price if it exists in the db
      */
-    List<CategoryEntity> findByKeyParentAndKeyName(String parent, String name);
+    List<CategoryEntity> findByKeyParentIdAndKeyCategoryId(UUID parentId, UUID categoryId);
     
 }

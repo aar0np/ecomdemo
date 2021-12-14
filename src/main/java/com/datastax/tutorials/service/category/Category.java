@@ -8,10 +8,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Category {
     private String name;
-    private UUID id;
+    private UUID categoryId;
     private String image;
-    private String parent;
-    private List<String> children;
+    private UUID parentId;
     private List<String> products;   
     
     public String getName() {
@@ -22,12 +21,12 @@ public class Category {
 		this.name = _name;
 	}
 
-    public UUID getId() {
-    	return this.id;
+    public UUID getCategoryId() {
+    	return this.categoryId;
 	}
 
-    public void setId(UUID _id) {
-		this.id = _id;
+    public void setCategoryId(UUID _categoryId) {
+		this.categoryId = _categoryId;
 	}
 
     public String getImage() {
@@ -38,22 +37,14 @@ public class Category {
 		this.image = _image;
 	}
 
-    public String getParent() {
-		return this.parent;
+    public UUID getParentId() {
+		return this.parentId;
 	}
 
-    public void setParent(String _parent) {
-		this.parent = _parent;
+    public void setParentId(UUID _parentId) {
+		this.parentId = _parentId;
 	}
 
-    public List<String> getChildren() {
-		return this.children;
-	}
-	
-    public void setChildren(List<String> _children) {
-		this.children = _children;
-	}
-	
     public List<String> getProducts() {
 		return this.products;
 	}
